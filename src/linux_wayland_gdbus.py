@@ -1,38 +1,24 @@
-import tkinter as tk
+"""
+This module implement the application for the Linux on Wayland platform.
+"""
+
+
+import platform
+import subprocess
 import threading
 import time
-import platform
-from pydbus import SessionBus
-from gi.repository import GLib
-import subprocess
-from enum import Enum
+import tkinter as tk
 
+from gi.repository import GLib
+from pydbus import SessionBus
+
+from settings import Settings, WindowSettings
 
 # Sound handling
 if platform.system() == "Windows":
     import winsound
 else:
     from playsound import playsound
-
-
-class WindowSettings(Enum):
-    TITLE: str = "20-20-20 Eye Care Timer"
-    HIGHT: int = 300
-    WIDTH: int = 150
-    FONT: tuple = ("Arial", 40, "bold")
-    RESIZABLE: bool = False
-
-
-class Settings(Enum):
-    """ Timer settings Enum.
-
-    :Attrs:
-    :T_MINUTES: Timer in minutes.
-    :I_MINUTES: Idle for N minutes. After idle for N minutes timer resets 
-        to its T_MINUTES value.
-    """
-    T_MINUTES: int = 2
-    I_MINUTES: int = 2
 
 
 class EyeCareApp:
