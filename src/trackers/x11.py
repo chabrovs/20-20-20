@@ -38,21 +38,20 @@ class X11Tracker(ActivityTracker):
         """Return True if user is active, False if idle."""
 
         if Settings.DEBUG.value:
-            idle_time = self.get_idle_time_s()
+            idle_time = self.get_idle_time_ms()
             print(
-                f"[DEBUG]: idle_for={idle_time} sec. is_active="
+                f"[DEBUG]: idle_for={idle_time:.2f} sec. is_active="
                 f"{idle_time <= Settings.I_MINUTES.value * 60}"
             )
 
-
-        return (time.time() - self.last_activity) <= Settings.I_MINUTES
+        return (self.get_idle_time_s()) <= Settings.I_MINUTES.value * 60
 
     def get_idle_time_ms(self) -> float:
         """Return idle time is ms according to DBus"""
 
-        return time.time() - self.last_activity
+        return (time.time() - self.last_activity) * 100
 
     def get_idle_time_s(self) -> float:
         """Return idle time is s according to DBus"""
 
-        return time.time() - self.last_activity / 1000.0
+        return time.time() - self.last_activity
