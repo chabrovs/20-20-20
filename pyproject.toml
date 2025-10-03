@@ -1,0 +1,18 @@
+[project]
+name = "20-20-20"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pycairo>=1.28.0",
+    "pydbus>=0.6.0",
+    "pygobject==3.50.0",
+]
+
+[dependency-groups]
+dev = [
+    "isort>=6.1.0",
+    "pylint>=3.3.8",
+    "vulture>=2.14",
+]
