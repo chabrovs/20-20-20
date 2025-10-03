@@ -52,6 +52,5 @@ class SoundSettings(Enum):
     """
 
     LINUX_SHORT_SOUND_PATH: str = str(
-            "/usr/share/sounds/freedesktop/stereo/"
-            "complete.oga"
+            "/usr/share/sounds/sound-icons/xylofon.wav"
         )
