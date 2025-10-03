@@ -7,7 +7,7 @@ Methods:
 """
 
 from .base import ActivityTracker
-from src.trackers import wayland
+from settings import Settings
 
 
 def get_activity_tracker(
@@ -25,13 +25,17 @@ def get_activity_tracker(
         if the system=="Linux".
     """
 
+    if Settings.DEBUG.value:
+        print(f"[DEBUG] (tracker.factory): session={session}")
+
     match system.capitalize():
         case "Linux":
-            if not session:
+            if session.lower() == "x11":
                 from src.trackers import x11
                 return x11.X11Tracker()
 
             if session.lower() == "wayland":
+                from src.trackers import wayland
                 return wayland.WaylandTracker()
 
         case "Windows":
